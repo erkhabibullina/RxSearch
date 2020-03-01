@@ -21,7 +21,7 @@ public abstract class DataSource {
      * @return ArrayList of students, where we search
      */
     public static ArrayList<String> getStudentList() {
-        //
+        
         List<String> studentList = Arrays.asList(
                 "Anna",
                 "Bob",
@@ -56,7 +56,6 @@ public abstract class DataSource {
 
         searchKey = searchKey.toUpperCase();
 
-        //
         for (String name : searchData) {
             if (name.toUpperCase().contains(searchKey)) {
                 searchResult.add(name);
