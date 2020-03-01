@@ -1,1 +1,2 @@
 # RxSearch
+In this example we are demonstrating how we can use RxJava library in order to implement search feature. Here we use some different operators. For example Debounce, which is used to execute the search task after some time interval. Also, we have used a basic Publis Subject operator, which emits the names when user type characters. Moreover, we implements Filter and SwitchMap operators and even more. We hope you will enjoy using this app, because search is a very common feature of our everyday apps.
