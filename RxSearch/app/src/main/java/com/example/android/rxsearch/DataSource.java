@@ -1,18 +1,24 @@
 package com.example.android.rxsearch;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observable;
 
-/**
- *
- */
+
+
+
 public abstract class DataSource {
+
+
     /**
+     * This method simply returns a new ArrayList of Strings that contains list of students, that
+     * are displaying in the MainActivity
      *
-     * @return
+     * @return ArrayList of students, where we search
      */
     public static ArrayList<String> getStudentList() {
         //
@@ -38,9 +44,11 @@ public abstract class DataSource {
     }
 
     /**
+     * getSearchDataObservable is called by the initPublisher to display data that contains
+     * right sequence of characters
      *
-     * @param searchKey
-     * @return
+     * @param searchKey A String of characters that users type in the SearchView
+     * @return An Observable that emits found names
      */
     public static Observable<ArrayList<String>> getSearchDataObservable(String searchKey) {
         ArrayList<String> searchData = getStudentList();
