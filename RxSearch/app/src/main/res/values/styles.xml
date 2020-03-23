@@ -1,11 +1,24 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#0d47a1</item>
+        <item name="colorPrimaryDark">#5472d3</item>
+        <item name="colorAccent">#002171</item>
     </style>
 
+    <style name="ActionBar.Popup" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:drawSelectorOnTop">true</item>
+        <item name="android:background">#3949ab</item>
+        <item name="android:textColorPrimary">#6f74dd</item>
+        <item name="android:textColorSecondary">#00227b</item>
+    </style>
+
+    <style name="ActionBarStyle" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+        <!-- Colors: hamburger, title text, overflow icon -->
+        <item name="android:textColorPrimary">@color/spinnerColorPrimary</item>
+        <!-- Colors: subtitle text -->
+        <item name="android:textColorSecondary">@color/spinnerColorAccent</item>
+        <!-- Overflow menu style -->
+        <item name="popupTheme">@style/ActionBar.Popup</item>
+    </style>
 </resources>
