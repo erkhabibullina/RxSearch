@@ -1,14 +1,10 @@
 package com.example.android.rxsearch;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observable;
-
-
 
 
 public abstract class DataSource {
@@ -21,24 +17,10 @@ public abstract class DataSource {
      * @return ArrayList of students, where we search
      */
     public static ArrayList<String> getStudentList() {
-        
+
         List<String> studentList = Arrays.asList(
-                "Anna",
-                "Bob",
-                "Den",
-                "Frodo",
-                "Fenvik",
-                "Goldman",
-                "God",
-                "Gena",
-                "Harris",
-                "Inna",
-                "Kate",
-                "Lana",
-                "Man",
-                "Nike",
-                "Nutella",
-                "Orc");
+                "Anna"
+        );
 
         return new ArrayList<String>(studentList);
     }

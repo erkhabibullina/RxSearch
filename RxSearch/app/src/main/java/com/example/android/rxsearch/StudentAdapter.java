@@ -1,8 +1,12 @@
 package com.example.android.rxsearch;
 
+import android.animation.Animator;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +21,11 @@ import java.util.ArrayList;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> {
 
+
+    static String baconTitle = "Bacon";
+    static String baconText = "Bacon ipsum dolor amet pork belly meatball kevin spare ribs. Frankfurter swine corned beef meatloaf, strip steak.";
+    static String veggieTitle = "Veggie";
+    static String veggieText = "Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.";
     private static final String TAG = "StudentAdapter";
 
     /**
@@ -28,7 +37,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
      * This gets called when each new ViewHolder is created. This happens when the RecyclerView
      * is laid out. Enough ViewHolders will be created to fill screen and allow for scrolling.
      *
-     * @param parent The ViewGroup that these ViewHolders are contained within.
+     * @param parent   The ViewGroup that these ViewHolders are contained within.
      * @param viewType If your RecyclerView has more than one type of item (which ours doesn't) you
      *                 can use this viewType integer to provide a different layout. See
      *                 {@link androidx.recyclerview.widget.RecyclerView.Adapter#getItemViewType(int)}
@@ -40,12 +49,15 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     @Override
     public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.student_list_item, null, false);
+        View itemView = inflater.inflate(R.layout.student_list_item, parent, false);
+
 
         StudentViewHolder viewHolder = new StudentViewHolder(itemView);
 
+
         return viewHolder;
     }
+
 
     /**
      * OnBindViewHolder is called by the RecyclerView to display the data at the specified
@@ -53,16 +65,14 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
      * names in the list for particular student, using the "position" argument that is conveniently
      * passed into us.
      *
-     *
-     * @param holder The ViewHolder which should be updated to represent the contents of the item
-     *               at the given position in the data set.
+     * @param holder   The ViewHolder which should be updated to represent the contents of the item
+     *                 at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
 
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
         String name = studentNames.get(position);
-
         holder.bind(name);
     }
 
@@ -80,6 +90,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
     /**
      * This method is used to set the student's names on an ArrayList of students names
+     *
      * @param studentNames The new student names to be displayed
      */
 
@@ -98,16 +109,42 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     }
 
     /**
-     *  Cache of the children views for a list item.
+     * Cache of the children views for a list item.
      */
 
-    public class StudentViewHolder extends RecyclerView.ViewHolder {
+    public static class StudentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mStudentName;
+        static int green;
+        static int white;
 
         public StudentViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mStudentName = itemView.findViewById(R.id.tv_student_name);
+            mStudentName = itemView.findViewById(R.id.package_name);
+
+            itemView.setOnClickListener(this);
+
+            if (green == 0)
+                green = itemView.getContext().getResources().getColor(R.color.colorAccent);
+            if (white == 0)
+                white = itemView.getContext().getResources().getColor(R.color.background_material_light);
+        }
+
+        @Override
+        public void onClick(View v) {
+            boolean isVeggie = ((ColorDrawable) v.getBackground()) != null && ((ColorDrawable) v.getBackground()).getColor() == green;
+
+            int finalRadius = (int) Math.hypot(v.getWidth() / 2, v.getHeight() / 2);
+
+            if (isVeggie) {
+                mStudentName.setText(baconTitle);
+                v.setBackgroundColor(white);
+            } else {
+                Animator anim = ViewAnimationUtils.createCircularReveal(v, (int) v.getWidth() / 2, (int) v.getHeight() / 2, 0, finalRadius);
+                mStudentName.setText(veggieTitle);
+                v.setBackgroundColor(green);
+                anim.start();
+            }
         }
 
         /**
